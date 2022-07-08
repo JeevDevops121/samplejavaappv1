@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('compile') {
 	   steps {
-		git url: 'https://github.com/lerndevops/samplejavaapp.git'
-		sh script: '/usr/share/maven/bin/mvn compile'
+		git url: 'https://github.com/JeevDevops121/samplejavaappv1.git'
+		sh script: '/opt/maven/bin/mvn compile'
            }
         }
         stage('codereview-pmd') {
 	   steps {
-		sh script: '/usr/share/maven/bin/mvn -P metrics pmd:pmd'
+		sh script: '/opt/maven/bin/mvn -P metrics pmd:pmd'
            }
 	   post {
                success {
@@ -20,7 +20,7 @@ pipeline {
         }
         stage('unit-test') {
 	   steps {
-		sh script: '/usr/share/maven/bin/mvn test'
+		sh script: '/opt/maven/bin/mvn test'
            }
 	   post {
                success {
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('metric-check') {
 	   steps {
-		sh script: '/usr/share/maven/bin/mvn cobertura:cobertura -Dcobertura.report.format=xml'
+		sh script: '/opt/maven/bin/mvn cobertura:cobertura -Dcobertura.report.format=xml'
            }
 	   post {
                success {
@@ -40,7 +40,7 @@ pipeline {
         }
         stage('package') {
 	   steps {
-		sh script: '/usr/share/maven/bin/mvn clean package'	
+		sh script: '/opt/maven/bin/mvn clean package'	
            }		
         }
     }
